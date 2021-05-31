@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "tb_tema" )
 public class Tema {
@@ -21,10 +23,11 @@ public class Tema {
 	private long id;
 	
 	@NotNull
-	@Size(min=20, max=100)
 	private String descricao;
 	
 	@OneToMany(mappedBy ="tema", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(
+)
 	private List<Postagem>postagem;
 	
 	
