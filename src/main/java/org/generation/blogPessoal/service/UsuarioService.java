@@ -30,6 +30,8 @@ public class UsuarioService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<Usuario>usuario = repository.findByUsuario(user.get().getUsuario());
 		
+		
+		
 		if(usuario.isPresent()) {
 			if(encoder.matches(user.get().getSenha(), usuario.get().getSenha())) {
 				
@@ -38,7 +40,10 @@ public class UsuarioService {
 				String authHeader = "Basic " + new String (encodedAuth);
 				
 				user.get().setToken(authHeader);
+				user.get().setId(usuario.get().getId());
 				user.get().setNome(usuario.get().getNome());
+				user.get().setLinkFoto(usuario.get().getLinkFoto());
+				user.get().setTipoUsuario(usuario.get().getTipoUsuario());
 				
 				return user;
 			}
